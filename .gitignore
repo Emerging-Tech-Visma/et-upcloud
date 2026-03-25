@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+
+# Secrets
+.env
+.env.*
+*.age
+~/.config/upcloud-deploy/
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Plans
+plans/

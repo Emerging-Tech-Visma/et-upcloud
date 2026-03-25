@@ -1,0 +1,20 @@
+{
+  "env": {
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "70"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(upctl:*)",
+      "Bash(ssh:*)",
+      "Bash(rsync:*)",
+      "Bash(docker:*)",
+      "Bash(git:*)",
+      "Bash(curl:*)",
+      "Bash(jq:*)",
+      "Bash(infisical:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf /:*)"
+    ]
+  }
+}

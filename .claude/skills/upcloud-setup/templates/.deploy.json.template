@@ -1,0 +1,34 @@
+{
+  "project": "{project_name}",
+  "zone": "{zone}",
+  "server": {
+    "uuid": "{server_uuid}",
+    "hostname": "{project_name}-prod",
+    "ip": "{server_ip}",
+    "plan": "{server_plan}"
+  },
+  "database": {
+    "uuid": "{db_uuid}",
+    "host": "{project_name}-pg-{zone}.db.upclouddatabases.com",
+    "port": 5432,
+    "name": "{project_name}",
+    "extensions": ["vector", "pg_cron", "pg_trgm"],
+    "roles": ["app_rw", "app_ro", "app_migrate"]
+  },
+  "storage": {
+    "uuid": "{storage_uuid_or_null}",
+    "bucket": "{project_name}-uploads",
+    "endpoint": "https://{project_name}-uploads.{zone}.upcloudobjects.com"
+  },
+  "secrets": {
+    "provider": "infisical",
+    "project_id": "{infisical_project_id}",
+    "environment": "prod"
+  },
+  "deploy": {
+    "method": "rsync",
+    "compose_file": "docker-compose.prod.yml",
+    "health_url": "https://{domain}/health",
+    "rsync_exclude": []
+  }
+}
