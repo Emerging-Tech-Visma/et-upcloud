@@ -52,7 +52,7 @@ The chosen provider is stored in `.deploy.json` under `secrets.provider`.
 
 ## Detailed References
 
-See `et-upcloud-plugin/skills/upcloud-setup/references/` and `et-upcloud-plugin/skills/upcloud-deploy/references/` for:
+See `skills/upcloud-setup/references/` and `skills/upcloud-deploy/references/` for:
 - Full `upctl` command reference
 - PostgreSQL extension configuration
 - Secret management playbooks (all three providers)

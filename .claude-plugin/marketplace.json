@@ -1,0 +1,17 @@
+{
+  "name": "et-upcloud",
+  "owner": {
+    "name": "Kennet Kusk"
+  },
+  "metadata": {
+    "description": "Provision and deploy full-stack apps on UpCloud with upctl CLI, Docker Compose, Caddy, and secure secret management.",
+    "version": "1.2.0"
+  },
+  "plugins": [
+    {
+      "name": "upcloud",
+      "source": "./et-upcloud-plugin",
+      "description": "Setup infrastructure and deploy apps on UpCloud. /upcloud:setup provisions servers, databases, storage, secrets. /upcloud:deploy pushes code, manages secrets, rolls back."
+    }
+  ]
+}
