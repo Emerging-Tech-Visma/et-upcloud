@@ -1,7 +1,7 @@
 {
   "name": "upcloud",
   "version": "1.2.0",
-  "description": "Provision and deploy full-stack apps on UpCloud with upctl CLI, Docker Compose, Caddy, and secure secret management.",
+  "description": "Provision and deploy full-stack apps on UpCloud with upctl CLI, managed PostgreSQL, Caddy auto-SSL, and low-risk secret management.",
   "author": {
     "name": "Kennet Kusk"
   },
@@ -10,11 +10,11 @@
     "upcloud",
     "infrastructure",
     "deployment",
+    "postgresql",
     "docker",
     "caddy",
-    "postgresql",
-    "secrets",
     "infisical",
-    "upctl"
+    "secrets",
+    "devops"
   ]
 }
