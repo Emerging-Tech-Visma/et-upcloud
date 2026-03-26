@@ -45,8 +45,8 @@ The chosen provider is stored in `.deploy.json` under `secrets.provider`.
 **Always run before creating a PR or deploying:**
 
 ```bash
-claude plugin validate /Users/kennetkusk/code/et-upcloud
-claude plugin validate /Users/kennetkusk/code/et-upcloud/et-upcloud-plugin
+claude plugin validate .
+claude plugin validate ./et-upcloud-plugin
 ```
 
 Both must pass. Do not push, create a PR, or deploy if validation fails.
@@ -55,36 +55,18 @@ Both must pass. Do not push, create a PR, or deploy if validation fails.
 
 **Every destructive operation on UpCloud requires explicit user approval. No exceptions.**
 
-This is enforced at two levels:
-
-1. **Permission deny list** — `settings.json` blocks all `upctl ... delete` and `upctl ip-address remove` commands. Claude Code will always prompt the user before executing these.
-2. **Skill instructions** — All skills require asking the user before any destructive action.
-
-Blocked commands (require user approval each time):
-- `upctl server delete`
-- `upctl database delete`
-- `upctl storage delete`
-- `upctl network delete`
-- `upctl router delete`
-- `upctl ip-address remove`
-- `upctl kubernetes delete`
-- `upctl object-storage delete`
-- `upctl loadbalancer delete`
-- `upctl server-group delete`
-
-Also applies to destructive operations via SSH:
-- `docker compose down` (stops and removes containers)
-- `docker image prune` / `docker system prune`
+Enforced via `settings.json` deny list — all `upctl ... delete` and `upctl ip-address remove` commands are blocked and will prompt the user. This also applies to:
+- `docker compose down`, `docker image prune`, `docker system prune` via SSH
 - `DROP TABLE`, `DROP DATABASE`, `DROP ROLE` via SQL
 - Deleting secret files or Infisical secrets
 
-**Never automate, script around, or batch delete operations. Each deletion must be individually confirmed.**
+**Never automate, script around, or batch delete operations. Each deletion must be individually confirmed by the user.**
 
 ## Principles
 
 1. **No secrets on disk** — Secrets flow through the configured provider. Never in .env files, never in images.
 2. **No secrets in images** — Injected at runtime (Infisical CLI, Docker tmpfs mount, or entrypoint fetch).
-3. **No deletes without user approval** — Enforced via permission deny list and skill instructions. Every destructive operation prompts the user.
+3. **No deletes without user approval** — Enforced via permission deny list. Every destructive operation prompts the user.
 4. **EU data residency** — Default zones: `fi-hel1`, `de-fra1`.
 5. **Least privilege** — Three DB roles (`app_rw`, `app_ro`, `app_migrate`). Scoped storage keys. Machine identities for automation.
 6. **Idempotent** — Running setup twice skips existing resources.
@@ -92,7 +74,7 @@ Also applies to destructive operations via SSH:
 
 ## Detailed References
 
-See `et-upcloud-plugin/skills/upcloud-setup/references/` and `et-upcloud-plugin/skills/upcloud-deploy/references/` for:
+See `skills/upcloud-setup/references/` and `skills/upcloud-deploy/references/` for:
 - Full `upctl` command reference
 - PostgreSQL extension configuration
 - Secret management playbooks (all three providers)
