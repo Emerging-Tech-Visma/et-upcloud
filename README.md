@@ -98,7 +98,7 @@ From inside Claude Code:
 To pin a specific version:
 
 ```bash
-/plugin marketplace add Emerging-Tech-Visma/et-upcloud@v1.2.0
+/plugin marketplace add Emerging-Tech-Visma/et-upcloud@v1.3.0
 ```
 
 ### Verify installation

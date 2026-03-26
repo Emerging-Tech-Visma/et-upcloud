@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.0 (2026-03-26)
+
+- Synced version across VERSION, marketplace.json, plugin.json, and CHANGELOG
+- Made repository public
+- Branch protection: main requires PR (no direct pushes)
+
 ## v1.2.0 (2026-03-25)
 
 - Restructured as Claude Code marketplace plugin
