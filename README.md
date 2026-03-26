@@ -43,7 +43,8 @@ UpCloud infrastructure skills for Claude Code — provision and deploy full-stac
 
 | Skill | Command | Description |
 | ----- | ------- | ----------- |
-| **setup** | `/upcloud:setup` | Provision server, DB, storage, secrets, roles |
+| **start** | `/upcloud:start` | Interactive onboarding wizard (guided setup from zero) |
+| **setup** | `/upcloud:setup` | Direct provisioning (for users who know what they want) |
 | **deploy** | `/upcloud:deploy push` | Sync code + rebuild containers |
 | | `/upcloud:deploy migrate` | Run database migrations |
 | | `/upcloud:deploy status` | Health check + container status |
@@ -98,7 +99,7 @@ From inside Claude Code:
 To pin a specific version:
 
 ```bash
-/plugin marketplace add Emerging-Tech-Visma/et-upcloud@v1.0.0
+/plugin marketplace add Emerging-Tech-Visma/et-upcloud@v1.1.0
 ```
 
 ### Verify installation
@@ -112,26 +113,37 @@ Claude should ask for your project name, zone, and features.
 
 ## Quick Start
 
-### 1. Provision infrastructure
+### Starting from zero? Use the wizard:
+
+```
+/upcloud:start
+```
+
+The wizard walks you through everything:
+1. Asks about your project, tech stack, data needs, and scale
+2. Recommends an architecture with cost estimate
+3. Shows the exact commands for your approval
+4. Provisions the infrastructure
+5. Generates standalone scripts (`scripts/deploy.sh`, `scripts/migrate.sh`, etc.)
+6. Shows a "what's next" checklist
+
+### Already know what you want?
 
 ```
 /upcloud:setup
 ```
 
-Answer the prompts:
-- **Project name**: `myapp`
-- **Zone**: `fi-hel1` (default, Helsinki EU)
-- **Server plan**: `2xCPU-4GB` (default)
-- **Database**: Yes
-- **Object storage**: No
-- **Secret provider**: Infisical (recommended)
+Jumps straight to provisioning — provide project name, zone, plan, and features.
 
-This creates the server, database, and secrets — then writes `.deploy.json` to your project.
-
-### 2. Deploy your app
+### Deploy your app
 
 ```
 /upcloud:deploy push
+```
+
+Or use the generated script:
+```bash
+./scripts/deploy.sh
 ```
 
 Syncs code via rsync, injects secrets, rebuilds Docker containers, and runs a health check.

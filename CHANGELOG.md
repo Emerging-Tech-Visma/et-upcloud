@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.1.0 (2026-03-26)
+
+- New `/upcloud:start` — interactive onboarding wizard (discover → recommend → plan → provision → scripts → onboard)
+- Generates standalone bash scripts: deploy.sh, migrate.sh, rollback.sh, status.sh, logs.sh, secrets.sh
+- Scripts are provider-aware (Infisical, Docker Secrets, S3 Bundle) and read .deploy.json
+- Scripts work without Claude Code — usable in CI/CD or any terminal
+- Updated README Quick Start to recommend `/upcloud:start` for new users
+
 ## v1.0.0 (2026-03-26)
 
 Initial public release.
