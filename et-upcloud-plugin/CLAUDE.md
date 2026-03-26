@@ -17,7 +17,8 @@ Deploy and manage full-stack applications on UpCloud using the `upctl` CLI, Dock
 
 ## Skills
 
-- **`/upcloud:setup`** — One-time infrastructure provisioning (server, DB, storage, secrets, roles)
+- **`/upcloud:start`** — Interactive onboarding wizard (discover → recommend → plan → provision → generate scripts → onboard)
+- **`/upcloud:setup`** — Direct infrastructure provisioning (for users who know what they want)
 - **`/upcloud:deploy`** — Continuous deployment (push, migrate, up, status, logs, rollback, secrets)
 
 ## Key Files
