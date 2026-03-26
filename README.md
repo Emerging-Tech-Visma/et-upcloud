@@ -7,15 +7,15 @@ UpCloud infrastructure skills for Claude Code — provision and deploy full-stac
 ## Workflow
 
 ```
-  1. SETUP                          2. DEPLOY                       3. MANAGE
-  /upcloud:setup                    /upcloud:deploy push            /upcloud:deploy status
-  ┌──────────────────┐              ┌──────────────────┐            ┌────────────┐
-  │ Create server    │              │ rsync code       │            │ Health     │
-  │ Provision DB     │  ──config──▶ │ Inject secrets   │  ──live──▶│ Logs       │
-  │ Setup secrets    │              │ Docker Compose   │            │ Rollback   │
-  │ Generate config  │              │ Caddy auto-SSL   │            │ Secrets    │
-  └──────────────────┘              └──────────────────┘            └────────────┘
-       writes .deploy.json               reads .deploy.json
+  0. START (optional)     1. SETUP                    2. DEPLOY                 3. MANAGE
+  /upcloud:start          /upcloud:setup              /upcloud:deploy push      /upcloud:deploy status
+  ┌────────────────┐      ┌────────────────┐          ┌────────────────┐        ┌────────────┐
+  │ Discover needs │      │ Create server  │          │ rsync code     │        │ Health     │
+  │ Recommend arch │─────▶│ Provision DB   │──config─▶│ Inject secrets │──live─▶│ Logs       │
+  │ Show plan      │      │ Setup secrets  │          │ Docker Compose │        │ Rollback   │
+  │ Generate scrpts│      │ Generate config│          │ Caddy auto-SSL │        │ Secrets    │
+  └────────────────┘      └────────────────┘          └────────────────┘        └────────────┘
+   interactive wizard      writes .deploy.json         reads .deploy.json        scripts/ too
 ```
 
 ## Architecture
@@ -148,7 +148,7 @@ Or use the generated script:
 
 Syncs code via rsync, injects secrets, rebuilds Docker containers, and runs a health check.
 
-### 3. Check status
+### Check status
 
 ```
 /upcloud:deploy status
@@ -165,13 +165,17 @@ et-upcloud/
 ├── et-upcloud-plugin/                ← plugin directory
 │   ├── .claude-plugin/
 │   │   ├── plugin.json               ← plugin identity + version
-│   │   └── settings.json             ← permissions
+│   │   └── settings.json             ← permissions + deny list for deletes
 │   ├── CLAUDE.md                     ← instructions loaded when active
 │   ├── commands/
-│   │   ├── setup.md                  ← /setup shortcut
-│   │   ├── deploy.md                 ← /deploy shortcut
-│   │   └── server-status.md          ← /server-status shortcut
+│   │   ├── start.md                  ← /start — onboarding wizard
+│   │   ├── setup.md                  ← /setup — direct provisioning
+│   │   ├── deploy.md                 ← /deploy — deployment commands
+│   │   └── server-status.md          ← /server-status — quick health check
 │   └── skills/
+│       ├── upcloud-start/
+│       │   ├── SKILL.md              ← onboarding wizard (6 phases)
+│       │   └── templates/scripts/    ← deploy.sh, migrate.sh, rollback.sh, etc.
 │       ├── upcloud-setup/
 │       │   ├── SKILL.md              ← setup skill definition
 │       │   ├── references/           ← provisioning playbooks
@@ -181,6 +185,7 @@ et-upcloud/
 │           └── references/           ← deploy, migrate, rollback playbooks
 ├── CLAUDE.md                         ← project overview
 ├── CHANGELOG.md
+├── RELEASING.md                      ← release checklist
 └── README.md
 ```
 
