@@ -40,11 +40,33 @@ Only three providers are supported, all rated low or acceptable risk:
 
 The chosen provider is stored in `.deploy.json` under `secrets.provider`.
 
+## Pre-flight Checks
+
+**Always run before creating a PR or deploying:**
+
+```bash
+claude plugin validate .
+claude plugin validate ./et-upcloud-plugin
+```
+
+Both must pass. Do not push, create a PR, or deploy if validation fails.
+
+## Deletion Policy — MANDATORY USER APPROVAL
+
+**Every destructive operation on UpCloud requires explicit user approval. No exceptions.**
+
+Enforced via `settings.json` deny list — all `upctl ... delete` and `upctl ip-address remove` commands are blocked and will prompt the user. This also applies to:
+- `docker compose down`, `docker image prune`, `docker system prune` via SSH
+- `DROP TABLE`, `DROP DATABASE`, `DROP ROLE` via SQL
+- Deleting secret files or Infisical secrets
+
+**Never automate, script around, or batch delete operations. Each deletion must be individually confirmed by the user.**
+
 ## Principles
 
 1. **No secrets on disk** — Secrets flow through the configured provider. Never in .env files, never in images.
 2. **No secrets in images** — Injected at runtime (Infisical CLI, Docker tmpfs mount, or entrypoint fetch).
-3. **No deletes without approval** — Always confirm before `upctl ... delete`.
+3. **No deletes without user approval** — Enforced via permission deny list. Every destructive operation prompts the user.
 4. **EU data residency** — Default zones: `fi-hel1`, `de-fra1`.
 5. **Least privilege** — Three DB roles (`app_rw`, `app_ro`, `app_migrate`). Scoped storage keys. Machine identities for automation.
 6. **Idempotent** — Running setup twice skips existing resources.

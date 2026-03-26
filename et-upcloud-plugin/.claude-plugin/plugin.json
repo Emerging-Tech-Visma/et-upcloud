@@ -1,6 +1,6 @@
 {
   "name": "upcloud",
-  "version": "1.3.0",
+  "version": "1.0.0",
   "description": "Provision and deploy full-stack apps on UpCloud with upctl CLI, managed PostgreSQL, Caddy auto-SSL, and low-risk secret management.",
   "author": {
     "name": "Kennet Kusk"
