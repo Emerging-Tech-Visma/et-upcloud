@@ -86,11 +86,11 @@ Encrypted `.env` in containers is **never** supported — high risk, no rotation
 
 ### Install the plugin
 
-```bash
-git clone https://github.com/Emerging-Tech-Visma/et-upcloud.git
+In Claude Code:
 
-# Add marketplace
-/plugin marketplace add ~/.claude/plugins/marketplaces/et-upcloud
+```bash
+# Add marketplace (GitHub format)
+/plugin marketplace add Emerging-Tech-Visma/et-upcloud
 
 # Install
 /plugin install upcloud@et-upcloud
