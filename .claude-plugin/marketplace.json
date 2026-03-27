@@ -1,0 +1,17 @@
+{
+  "name": "et-upcloud",
+  "owner": {
+    "name": "Kennet Kusk"
+  },
+  "metadata": {
+    "description": "Provision and deploy full-stack apps on UpCloud with upctl CLI, Caddy auto-SSL, and low-risk secret management.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "upcloud",
+      "source": "./et-upcloud-plugin",
+      "description": "Provision servers, databases, storage, and deploy apps on UpCloud. /upcloud:setup and /upcloud:deploy."
+    }
+  ]
+}
